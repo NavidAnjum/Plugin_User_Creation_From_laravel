@@ -39,6 +39,26 @@ require_once('wp-admin/includes/taxonomy.php');
             $member = wp_insert_user( $memberdata );
 
     }
+
+    $blogusers = get_users( array( 'role__in' => array(  'subscriber' ) ) );
+	?>
+	<table>
+  <tr>
+    <th>Name</th>
+    <th>URL</th>
+  </tr>
+
+	<?php
+	
+    foreach ( $blogusers as $user ) {
+      ?>
+      <tr>
+        <td><?php echo esc_html($user->display_name ) ?></td>
+        <td><a href="<?php echo esc_html($user->user_url)?>">More Info of User</a></td>
+      </tr>
+      <?php
+        
+    }
   }
   add_action( 'wp_footer', 'SWP_Whatsapp_btn' );
 
